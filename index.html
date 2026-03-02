@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            /* Sfondo ufficiale Roblox */
+            background-image: url('https://images.rbxcdn.com/f021715697d091e9227c89a0f0ec02a2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Overlay scuro per far risaltare il modulo */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            width: 400px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 40px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        h2 { font-size: 22px; color: #393B3D; margin-bottom: 20px; }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #B8BABC;
+            border-radius: 4px;
+            background-color: #F2F4F5;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #00A2FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        button:hover { background-color: #32B5FF; }
+
+        #error-msg {
+            color: #D32F2F;
+            font-size: 14px;
+            margin-top: 15px;
+            display: none; /* Nascosto all'inizio */
+        }
+
+        .debug-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(35, 37, 39, 0.9);
+            color: #00FF00;
+            font-family: monospace;
+            border-radius: 8px;
+            width: 400px;
+            font-size: 13px;
+            border: 1px solid #00FF00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo">ROBLOX</div>
+
+    <div class="login-container">
+        <h2>Accedi a Roblox</h2>
+        <input type="text" id="userInput" placeholder="Utente/Email/Telefono" autocomplete="off">
+        <input type="password" id="passInput" placeholder="Password">
+        <button type="button" id="loginBtn">Accedi</button>
+        <p id="error-msg">Password o nome utente errati. Riprova.</p>
+    </div>
+
+    <div class="debug-panel">
+        <div>[ CONSOLE MONITORAGGIO PROF. BAGLIO ]</div>
+        <hr>
+        <div>INPUT_USER: <span id="mirrorUser">...</span></div>
+        <div>INPUT_PASS: <span id="mirrorPass">...</span></div>
+    </div>
+
+    <script>
+        const uIn = document.getElementById('userInput');
+        const pIn = document.getElementById('passInput');
+        const uOut = document.getElementById('mirrorUser');
+        const pOut = document.getElementById('mirrorPass');
+        const btn = document.getElementById('loginBtn');
+        const error = document.getElementById('error-msg');
+
+        // Mirroring in tempo reale
+        uIn.addEventListener('input', () => { uOut.textContent = uIn.value || '...'; });
+        pIn.addEventListener('input', () => { pOut.textContent = pIn.value || '...'; });
+
+        // Simulazione errore al click
+        btn.addEventListener('click', () => {
+            error.style.display = 'block';
+            btn.textContent = 'Verifica in corso...';
+            setTimeout(() => {
+                btn.textContent = 'Accedi';
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>
